@@ -1,0 +1,1523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UMS &middot; Board Memorandum &middot; 28 April 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Poppins:wght@500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* UMS brand DNA from united-multimodal.com */
+    --orange: #e87722;
+    --orange-bright: #ff8a30;
+    --orange-dark: #D47500;
+    --orange-deep: #cf6010;
+    --orange-soft: rgba(232, 119, 34, 0.08);
+    --navy: #1a1a2e;
+    --navy-mid: #2d5f8a;
+    --navy-deep: #1b3a6b;
+    --blue-light: #e8eef7;
+    --cream: #FFF6EC;
+    --cream-dark: #FAEAD6;
+    --off-white: #fafaf8;
+    --grey-900: #1a1a2e;
+    --grey-700: #3d3d4e;
+    --grey-500: #6b6b7a;
+    --grey-400: #9aa0a6;
+    --grey-300: #c4c4cc;
+    --grey-200: #ECECEC;
+    --grey-100: #F4F4F2;
+    --green: #2E7D32;
+    --green-light: #E8F5E9;
+    --amber: #B86E00;
+    --amber-light: #FFF4E0;
+    --red: #C62828;
+    --red-light: #FFEBEE;
+
+    --shadow-xs: 0 1px 2px rgba(26, 26, 46, 0.04);
+    --shadow-sm: 0 2px 8px rgba(26, 26, 46, 0.06);
+    --shadow-md: 0 8px 24px rgba(26, 26, 46, 0.08);
+    --shadow-lg: 0 24px 60px rgba(26, 26, 46, 0.12);
+    --shadow-orange: 0 6px 20px rgba(232, 119, 34, 0.22);
+
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 20px;
+    --space-6: 24px;
+    --space-8: 32px;
+    --space-10: 40px;
+    --space-12: 48px;
+    --space-14: 56px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; border-radius: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--navy);
+    background: var(--off-white);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11', 'ss01';
+  }
+
+  h1, h2, h3, .display, .memo-title, .firm-name, .section-heading, .privilege,
+  .footer-privilege, .lang-switch-btn, .timing, .rating-label, .rating-grade,
+  .meta-row .label, .kpi-label, .kpi-value, .kpi-delta, .kpi-sub, .status-text,
+  .risk-label, .risk-value {
+    font-family: 'Poppins', 'Inter', sans-serif;
+  }
+
+  .num { font-family: 'JetBrains Mono', 'SF Mono', Menlo, monospace; font-feature-settings: 'tnum'; letter-spacing: -0.5px; }
+
+  /* ============== SCROLL PROGRESS ============== */
+  .scroll-progress {
+    position: fixed;
+    top: 0; left: 0;
+    height: 2px;
+    width: 0%;
+    background: linear-gradient(90deg, var(--orange-deep), var(--orange-bright));
+    z-index: 200;
+    transition: width 0.1s linear;
+  }
+
+  /* ============== PAGE / DOC SHELL ============== */
+  .page {
+    max-width: 980px;
+    margin: 32px auto;
+    background: #FFFFFF;
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* ============== LETTERHEAD ============== */
+  .brand-bar {
+    height: 5px;
+    background: linear-gradient(90deg, var(--orange-deep) 0%, var(--orange) 50%, var(--orange-bright) 100%);
+  }
+
+  .letterhead {
+    padding: 28px 56px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 1px solid var(--grey-200);
+    background: linear-gradient(180deg, #FFFFFF 0%, var(--off-white) 100%);
+  }
+
+  .letterhead-left {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+
+  .ums-logo {
+    width: 60px;
+    height: 40px;
+    flex-shrink: 0;
+  }
+
+  .firm-name {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--navy);
+    letter-spacing: -0.2px;
+  }
+
+  .firm-tagline {
+    font-size: 11px;
+    color: var(--orange);
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    margin-top: 4px;
+    font-weight: 700;
+  }
+
+  .firm-sub {
+    font-size: 10px;
+    color: var(--grey-500);
+    letter-spacing: 0.8px;
+    margin-top: 4px;
+  }
+
+  .letterhead-right {
+    text-align: right;
+    font-size: 11px;
+    color: var(--grey-500);
+    line-height: 1.6;
+  }
+
+  .ref-stamp {
+    display: inline-block;
+    padding: 4px 10px;
+    border: 1.5px solid var(--navy);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--navy);
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+
+  /* ============== MEMO TITLE ============== */
+  .memo-title-block {
+    text-align: center;
+    padding: 36px 56px 18px;
+  }
+
+  .doc-eyebrow {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    color: var(--grey-500);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    padding: 0 12px;
+    position: relative;
+  }
+  .doc-eyebrow::before, .doc-eyebrow::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 32px;
+    height: 1px;
+    background: var(--grey-300);
+  }
+  .doc-eyebrow::before { right: 100%; }
+  .doc-eyebrow::after { left: 100%; }
+
+  .memo-title {
+    font-size: 30px;
+    font-weight: 800;
+    letter-spacing: 10px;
+    color: var(--navy);
+    text-transform: uppercase;
+  }
+
+  .privilege {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--orange);
+    text-transform: uppercase;
+    letter-spacing: 3.5px;
+    margin-top: 10px;
+  }
+
+  /* ============== STATUS RAIL ============== */
+  .status-rail {
+    margin: 20px 56px 0;
+    padding: 14px 18px;
+    background: var(--navy);
+    color: #FFF;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    border-left: 4px solid var(--orange);
+  }
+
+  .status-dot {
+    width: 10px;
+    height: 10px;
+    background: var(--orange-bright);
+    flex-shrink: 0;
+    box-shadow: 0 0 0 4px rgba(255, 138, 48, 0.2);
+    animation: pulse 2.4s var(--ease-out) infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 4px rgba(255, 138, 48, 0.2); }
+    50% { box-shadow: 0 0 0 8px rgba(255, 138, 48, 0.05); }
+  }
+
+  .status-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--orange-bright);
+    flex-shrink: 0;
+  }
+
+  .status-text {
+    font-size: 13px;
+    font-weight: 600;
+    color: #FFF;
+    flex: 1;
+  }
+
+  .status-text strong {
+    color: var(--orange-bright);
+  }
+
+  .status-pill {
+    background: var(--orange);
+    color: #FFF;
+    padding: 4px 12px;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    flex-shrink: 0;
+  }
+
+  /* ============== LANGUAGE SWITCH ============== */
+  .lang-switch-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 56px 8px;
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 1px solid transparent;
+    transition: all 0.3s var(--ease-out);
+  }
+
+  .lang-switch-wrap.scrolled {
+    border-bottom-color: var(--grey-200);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .lang-switch {
+    display: inline-flex;
+    background: var(--navy);
+    padding: 4px;
+    position: relative;
+    box-shadow: var(--shadow-md);
+  }
+
+  .lang-switch-indicator {
+    position: absolute;
+    top: 4px;
+    bottom: 4px;
+    background: linear-gradient(135deg, var(--orange) 0%, var(--orange-deep) 100%);
+    box-shadow: var(--shadow-orange);
+    transition: transform 0.5s var(--ease-spring), width 0.4s var(--ease-out);
+    z-index: 1;
+  }
+
+  .lang-switch-btn {
+    position: relative;
+    z-index: 2;
+    border: none;
+    background: transparent;
+    padding: 9px 22px;
+    font-size: 12px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.65);
+    cursor: pointer;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    transition: color 0.3s var(--ease-out);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    user-select: none;
+  }
+
+  .lang-switch-btn .flag-svg {
+    width: 16px;
+    height: 11px;
+    overflow: hidden;
+    flex-shrink: 0;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+  }
+
+  .lang-switch-btn:hover {
+    color: rgba(255, 255, 255, 0.95);
+  }
+
+  .lang-switch-btn.active,
+  .lang-switch-btn.active:hover {
+    color: #FFFFFF;
+  }
+
+  .kbd-hint {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-left: 16px;
+    font-size: 10px;
+    color: var(--grey-400);
+    letter-spacing: 0.5px;
+  }
+
+  .kbd {
+    background: #FFF;
+    border: 1px solid var(--grey-300);
+    border-bottom-width: 2px;
+    padding: 1px 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: var(--navy);
+    font-weight: 700;
+  }
+
+  /* ============== META BLOCK ============== */
+  .meta-block {
+    margin: 0 56px;
+    padding: 24px 0 20px;
+    border-top: 1px solid var(--navy);
+    border-bottom: 1px solid var(--navy);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 32px;
+  }
+
+  .meta-row {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 14px;
+    padding: 4px 0;
+    font-size: 12.5px;
+  }
+
+  .meta-row .label {
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    font-size: 10.5px;
+    color: var(--grey-500);
+    padding-top: 1px;
+  }
+
+  .meta-row .value {
+    color: var(--navy);
+    font-weight: 500;
+  }
+
+  /* ============== HERO KPI BAND ============== */
+  .kpi-band {
+    margin: 24px 56px 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border: 1px solid var(--grey-200);
+    background: #FFFFFF;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .kpi-card {
+    padding: 18px 18px 16px;
+    border-right: 1px solid var(--grey-200);
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s var(--ease-out);
+  }
+
+  .kpi-card:last-child { border-right: none; }
+
+  .kpi-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--orange);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s var(--ease-out);
+  }
+
+  .kpi-card:hover { background: var(--orange-soft); }
+  .kpi-card:hover::before { transform: scaleX(1); }
+
+  .kpi-icon {
+    width: 22px;
+    height: 22px;
+    color: var(--orange);
+    margin-bottom: 8px;
+  }
+  .kpi-icon svg { width: 100%; height: 100%; }
+
+  .kpi-label {
+    font-size: 9.5px;
+    font-weight: 700;
+    color: var(--grey-500);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 6px;
+  }
+
+  .kpi-value {
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--navy);
+    line-height: 1.05;
+    letter-spacing: -1px;
+  }
+
+  .kpi-value .unit {
+    font-size: 13px;
+    color: var(--grey-500);
+    font-weight: 600;
+    letter-spacing: 0;
+    margin-left: 2px;
+  }
+
+  .kpi-delta {
+    margin-top: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .kpi-delta.up { color: var(--green); }
+  .kpi-delta.flat { color: var(--grey-500); }
+  .kpi-delta.warn { color: var(--amber); }
+
+  .kpi-sub {
+    margin-top: 4px;
+    font-size: 10.5px;
+    color: var(--grey-500);
+    font-weight: 500;
+  }
+
+  .kpi-spark {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 60%;
+    height: 30px;
+    opacity: 0.18;
+    pointer-events: none;
+  }
+
+  /* ============== BODY ============== */
+  .memo-body {
+    padding: 28px 56px 36px;
+  }
+
+  .section { margin-bottom: 28px; }
+
+  .section-heading {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--navy);
+    text-transform: uppercase;
+    letter-spacing: 2.8px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid var(--orange);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-num {
+    background: linear-gradient(135deg, var(--orange) 0%, var(--orange-deep) 100%);
+    color: #FFFFFF;
+    width: 24px;
+    height: 24px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 800;
+    flex-shrink: 0;
+    box-shadow: var(--shadow-orange);
+  }
+
+  .section p {
+    font-size: 13px;
+    line-height: 1.75;
+    color: var(--grey-700);
+  }
+
+  .section p strong {
+    color: var(--navy);
+    font-weight: 700;
+  }
+
+  .section p .highlight {
+    background: linear-gradient(180deg, transparent 60%, var(--cream-dark) 60%);
+    padding: 0 2px;
+    color: var(--navy);
+    font-weight: 700;
+  }
+
+  /* ============== TABLE ============== */
+  .figures-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 12.5px;
+    margin-top: 6px;
+    border: 1px solid var(--grey-300);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .figures-table thead th {
+    background: var(--navy);
+    color: #FFFFFF;
+    padding: 10px 12px;
+    text-align: right;
+    font-size: 10.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .figures-table thead th:first-child { text-align: left; }
+
+  .figures-table thead th.highlight {
+    background: linear-gradient(135deg, var(--orange) 0%, var(--orange-deep) 100%);
+  }
+
+  .figures-table tbody td {
+    padding: 8px 12px;
+    text-align: right;
+    border-bottom: 1px solid var(--grey-200);
+    font-variant-numeric: tabular-nums;
+    transition: background 0.15s ease;
+  }
+
+  .figures-table tbody td:first-child {
+    text-align: left;
+    font-weight: 600;
+    color: var(--navy);
+  }
+
+  .figures-table tbody td.spark-col {
+    text-align: center;
+    width: 70px;
+    padding: 4px 8px;
+  }
+
+  .spark-svg { width: 60px; height: 18px; }
+
+  .figures-table tbody tr:nth-child(even) td { background: #FBFBFA; }
+  .figures-table tbody tr:hover td { background: var(--orange-soft); }
+  .figures-table tbody tr:last-child td { border-bottom: none; }
+
+  .cell-highlight {
+    background: var(--cream) !important;
+    font-weight: 700;
+    color: var(--orange-deep);
+  }
+
+  .cit-row td {
+    background: var(--navy) !important;
+    color: #FFF !important;
+    border-top: 2px solid var(--orange) !important;
+    font-weight: 700;
+  }
+
+  .cit-row td:first-child {
+    color: var(--orange-bright) !important;
+  }
+
+  .table-note {
+    font-size: 10.5px;
+    color: var(--grey-500);
+    font-style: italic;
+    margin-top: 8px;
+  }
+
+  /* ============== FINDINGS / RISK GRID ============== */
+  .risk-grid {
+    display: grid;
+    gap: 0;
+    border: 1px solid var(--grey-200);
+    background: #FFF;
+    margin-top: 4px;
+  }
+
+  .risk-row {
+    display: grid;
+    grid-template-columns: 100px 1fr 90px;
+    gap: 0;
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--grey-200);
+    transition: background 0.2s ease;
+  }
+
+  .risk-row:last-child { border-bottom: none; }
+  .risk-row:hover { background: var(--orange-soft); }
+
+  .risk-severity {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .severity-bar {
+    width: 36px;
+    height: 6px;
+    display: flex;
+    gap: 2px;
+  }
+
+  .severity-bar span {
+    flex: 1;
+    background: var(--grey-200);
+  }
+
+  .risk-row[data-sev="high"] .severity-bar span { background: var(--red); }
+  .risk-row[data-sev="medium"] .severity-bar span:nth-child(-n+2) { background: var(--amber); }
+  .risk-row[data-sev="low"] .severity-bar span:nth-child(1) { background: var(--green); }
+  .risk-row[data-sev="high"] .risk-severity { color: var(--red); }
+  .risk-row[data-sev="medium"] .risk-severity { color: var(--amber); }
+  .risk-row[data-sev="low"] .risk-severity { color: var(--green); }
+
+  .risk-content {
+    padding: 0 16px;
+    font-size: 12.5px;
+    line-height: 1.6;
+    color: var(--grey-700);
+  }
+
+  .risk-content strong {
+    color: var(--navy);
+    font-weight: 700;
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  .risk-tag {
+    text-align: right;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--orange-deep);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-family: 'Poppins', sans-serif;
+    align-self: center;
+  }
+
+  /* ============== RECOMMENDATIONS ============== */
+  .legal-list {
+    list-style: none;
+    counter-reset: legal;
+    margin-top: 4px;
+    border: 1px solid var(--grey-200);
+    background: #FFF;
+  }
+
+  .legal-list > li {
+    counter-increment: legal;
+    padding: 14px 20px 14px 56px;
+    position: relative;
+    font-size: 13px;
+    line-height: 1.65;
+    color: var(--grey-700);
+    border-bottom: 1px solid var(--grey-200);
+    transition: background 0.2s ease;
+  }
+
+  .legal-list > li:last-child { border-bottom: none; }
+  .legal-list > li:hover { background: var(--orange-soft); }
+
+  .legal-list > li::before {
+    content: counter(legal, decimal-leading-zero);
+    position: absolute;
+    left: 16px;
+    top: 12px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    color: var(--orange);
+    font-size: 18px;
+    letter-spacing: -0.5px;
+  }
+
+  .legal-list strong {
+    color: var(--navy);
+    font-weight: 700;
+  }
+
+  .timing {
+    display: inline-block;
+    background: var(--navy);
+    color: #FFFFFF;
+    font-size: 9.5px;
+    font-weight: 700;
+    padding: 3px 9px;
+    margin-right: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    vertical-align: 2px;
+  }
+
+  /* ============== CONCLUSION ============== */
+  .conclusion-box {
+    background: var(--navy);
+    border-left: 4px solid var(--orange);
+    padding: 20px 24px;
+    margin-top: 8px;
+    color: #FFF;
+    box-shadow: var(--shadow-md);
+  }
+
+  .conclusion-box p {
+    font-size: 13px;
+    line-height: 1.75;
+    margin-bottom: 8px;
+    color: rgba(255, 255, 255, 0.92);
+  }
+
+  .conclusion-box p strong {
+    color: var(--orange-bright);
+    font-weight: 700;
+  }
+
+  .rating-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+  }
+
+  .rating-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--orange-bright);
+    font-weight: 700;
+  }
+
+  .rating-grade {
+    font-size: 18px;
+    font-weight: 800;
+    color: #FFF;
+    letter-spacing: 1px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .rating-grade .arrow {
+    color: var(--orange-bright);
+    font-size: 14px;
+  }
+
+  /* ============== FOOTER ============== */
+  .memo-footer {
+    border-top: 2px solid var(--navy);
+    padding: 18px 56px 32px;
+    font-size: 11px;
+    color: var(--grey-500);
+    line-height: 1.6;
+    background: linear-gradient(180deg, var(--off-white) 0%, #FFFFFF 100%);
+  }
+
+  .footer-privilege {
+    font-weight: 700;
+    color: var(--navy);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 8px;
+    font-size: 10.5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .footer-privilege::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    background: var(--orange);
+    flex-shrink: 0;
+  }
+
+  .footer-sources {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid var(--grey-200);
+  }
+
+  /* ============== ACTIONS ============== */
+  .actions {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    display: flex;
+    gap: 8px;
+    z-index: 100;
+  }
+
+  .action-btn {
+    background: linear-gradient(135deg, var(--orange) 0%, var(--orange-deep) 100%);
+    color: #FFFFFF;
+    border: none;
+    padding: 11px 18px;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: var(--shadow-orange);
+    transition: all 0.25s var(--ease-out);
+    letter-spacing: 1px;
+    font-family: 'Poppins', sans-serif;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .action-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 32px rgba(232, 119, 34, 0.4);
+  }
+
+  .action-btn:active { transform: translateY(0); }
+
+  .action-btn.secondary {
+    background: var(--navy);
+    color: #FFF;
+    box-shadow: var(--shadow-md);
+  }
+
+  .action-btn.secondary:hover {
+    background: var(--grey-900);
+  }
+
+  /* ============== LANG PANELS ============== */
+  .lang-panel { display: none; opacity: 0; }
+  .lang-panel.active { display: block; animation: panelEnter 0.5s var(--ease-out) forwards; }
+
+  @keyframes panelEnter {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .lang-panel.active > * {
+    opacity: 0;
+    animation: stagger 0.5s var(--ease-out) forwards;
+  }
+
+  .lang-panel.active > *:nth-child(1) { animation-delay: 0.04s; }
+  .lang-panel.active > *:nth-child(2) { animation-delay: 0.08s; }
+  .lang-panel.active > *:nth-child(3) { animation-delay: 0.12s; }
+  .lang-panel.active > *:nth-child(4) { animation-delay: 0.16s; }
+
+  @keyframes stagger {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ============== PRINT ============== */
+  @media print {
+    @page { size: A4 portrait; margin: 10mm; }
+    body { background: #FFFFFF; font-size: 9.5px; }
+    .page { box-shadow: none; margin: 0; max-width: 100%; }
+    .lang-switch-wrap, .actions, .scroll-progress, .kbd-hint { display: none !important; }
+    .letterhead, .memo-title-block, .meta-block, .memo-body, .memo-footer, .status-rail, .kpi-band { padding-left: 0 !important; padding-right: 0 !important; margin-left: 0 !important; margin-right: 0 !important; }
+    .meta-block { margin: 8px 0 0; padding: 8px 0; gap: 0 16px; }
+    .memo-body { padding-top: 12px; padding-bottom: 12px; }
+    .memo-footer { padding-top: 8px; padding-bottom: 8px; }
+    .figures-table { font-size: 8.5px; box-shadow: none; }
+    .figures-table thead th, .figures-table tbody td { padding: 3px 5px; }
+    .legal-list > li { font-size: 9.5px; padding: 6px 12px 6px 36px; }
+    .legal-list > li::before { font-size: 14px; left: 10px; top: 5px; }
+    .lang-panel.print-all { display: block !important; page-break-after: always; opacity: 1 !important; }
+    .lang-panel.print-all:last-child { page-break-after: auto; }
+    .lang-panel.active > *, .lang-panel.print-all > * { opacity: 1 !important; animation: none !important; }
+    .kpi-card { padding: 8px 10px; }
+    .kpi-value { font-size: 16px; }
+    .conclusion-box { padding: 10px 14px; }
+    .section { margin-bottom: 14px; }
+  }
+
+  @media (max-width: 720px) {
+    .page { margin: 0; }
+    .letterhead, .meta-block, .memo-body, .memo-footer, .lang-switch-wrap, .status-rail, .kpi-band { padding-left: 16px; padding-right: 16px; margin-left: 0; margin-right: 0; }
+    .meta-block { grid-template-columns: 1fr; gap: 0; }
+    .kpi-band { grid-template-columns: 1fr 1fr; }
+    .kpi-card:nth-child(2) { border-right: none; }
+    .kpi-card:nth-child(1), .kpi-card:nth-child(2) { border-bottom: 1px solid var(--grey-200); }
+    .memo-title-block { padding: 24px 16px 12px; }
+    .memo-title { font-size: 22px; letter-spacing: 6px; }
+    .meta-row { grid-template-columns: 100px 1fr; }
+    .figures-table { font-size: 11px; }
+    .lang-switch-btn { padding: 8px 14px; font-size: 11px; letter-spacing: 1px; }
+    .kbd-hint { display: none; }
+    .actions { bottom: 12px; right: 12px; }
+    .risk-row { grid-template-columns: 90px 1fr; }
+    .risk-tag { display: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<div class="page">
+
+  <div class="brand-bar"></div>
+
+  <!-- LETTERHEAD -->
+  <div class="letterhead">
+    <div class="letterhead-left">
+      <svg class="ums-logo" viewBox="0 0 200 130" xmlns="http://www.w3.org/2000/svg" aria-label="UMS Logo">
+        <g fill="#e87722">
+          <path d="M 8 8 L 8 86 C 8 110 28 126 52 126 C 76 126 96 110 96 86 L 96 8 L 70 8 L 70 84 C 70 96 62 102 52 102 C 42 102 34 96 34 84 L 34 8 Z"/>
+          <path d="M 104 126 L 104 8 L 130 8 L 158 76 L 186 8 L 196 8 L 196 126 L 172 126 L 172 56 L 168 56 L 150 100 L 134 100 L 116 56 L 112 56 L 112 126 Z"/>
+        </g>
+      </svg>
+      <div>
+        <div class="firm-name">UNITED MULTIMODAL SERVICES sp. z o.o.</div>
+        <div class="firm-tagline">Source. Delivered.</div>
+        <div class="firm-sub">Rail &middot; Container &middot; Logistics &middot; PL &middot; UA &middot; GE</div>
+      </div>
+    </div>
+    <div class="letterhead-right">
+      <div class="ref-stamp">UMS-BOARD-2026-Q1</div>
+      <div>Issued: 28 April 2026</div>
+      <div>Page 1 of 1</div>
+    </div>
+  </div>
+
+  <!-- MEMO TITLE -->
+  <div class="memo-title-block">
+    <div class="doc-eyebrow">Single-Page Briefing</div>
+    <div class="memo-title">Memorandum</div>
+    <div class="privilege">Privileged &amp; Confidential &middot; Board Use Only</div>
+  </div>
+
+  <!-- STATUS RAIL -->
+  <div class="status-rail" id="statusRail">
+    <div class="status-dot"></div>
+    <div class="status-label">Position</div>
+    <div class="status-text" data-en="UMS is profitable, debt-free, and growing fast. <strong>Q1 2026 already exceeds full-year 2025 net profit.</strong>" data-pl="UMS jest rentowna, bez długu długoterminowego i szybko rośnie. <strong>Wynik za I kw. 2026 już przewyższył całoroczny zysk netto 2025.</strong>" data-ua="UMS прибуткова, без довгострокового боргу та швидко зростає. <strong>Прибуток за I кв. 2026 вже перевищив річний результат 2025.</strong>">UMS is profitable, debt-free, and growing fast. <strong>Q1 2026 already exceeds full-year 2025 net profit.</strong></div>
+    <div class="status-pill" data-en="SATISFACTORY" data-pl="ZADOWALAJĄCA" data-ua="ЗАДОВІЛЬНО">SATISFACTORY</div>
+  </div>
+
+  <!-- LANGUAGE SWITCH -->
+  <div class="lang-switch-wrap" id="langSwitchWrap">
+    <div class="lang-switch" role="tablist">
+      <div class="lang-switch-indicator" id="langIndicator"></div>
+      <button class="lang-switch-btn active" data-lang="en" role="tab" aria-selected="true">
+        <svg class="flag-svg" viewBox="0 0 60 30"><clipPath id="t1"><path d="M0,0 v30 h60 v-30 z"/></clipPath><clipPath id="s1"><path d="M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z"/></clipPath><g clip-path="url(#t1)"><path d="M0,0 v30 h60 v-30 z" fill="#012169"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,30 M60,0 L0,30" clip-path="url(#s1)" stroke="#C8102E" stroke-width="4"/><path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/><path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="6"/></g></svg>
+        EN
+      </button>
+      <button class="lang-switch-btn" data-lang="pl" role="tab" aria-selected="false">
+        <svg class="flag-svg" viewBox="0 0 16 10"><rect width="16" height="5" fill="#fff"/><rect y="5" width="16" height="5" fill="#DC143C"/></svg>
+        PL
+      </button>
+      <button class="lang-switch-btn" data-lang="ua" role="tab" aria-selected="false">
+        <svg class="flag-svg" viewBox="0 0 16 10"><rect width="16" height="5" fill="#0057B7"/><rect y="5" width="16" height="5" fill="#FFD700"/></svg>
+        UA
+      </button>
+    </div>
+    <span class="kbd-hint"><span class="kbd">1</span><span class="kbd">2</span><span class="kbd">3</span> &nbsp;or&nbsp; <span class="kbd">←</span><span class="kbd">→</span></span>
+  </div>
+
+  <!-- ============================== ENGLISH ============================== -->
+  <div class="lang-panel active" data-lang-panel="en">
+
+    <div class="meta-block">
+      <div class="meta-row"><div class="label">To:</div><div class="value">Board of Directors, UMS sp. z o.o.</div></div>
+      <div class="meta-row"><div class="label">From:</div><div class="value">Corporate Advisory Team</div></div>
+      <div class="meta-row"><div class="label">Date:</div><div class="value">28 April 2026</div></div>
+      <div class="meta-row"><div class="label">Subject:</div><div class="value">FY 2025 Review &amp; Q1 2026 Tax Position</div></div>
+      <div class="meta-row"><div class="label">FX Reference:</div><div class="value">PLN/EUR = 4.25 (mid-market, indicative)</div></div>
+      <div class="meta-row"><div class="label">Basis:</div><div class="value">Polish GAAP (PSR) — unaudited</div></div>
+    </div>
+
+    <!-- HERO KPI BAND -->
+    <div class="kpi-band">
+      <div class="kpi-card">
+        <div class="kpi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 17l6-6 4 4 8-8"/><path d="M21 7v0M14 7h7v7"/></svg></div>
+        <div class="kpi-label">Revenue 2025</div>
+        <div class="kpi-value num">PLN 16.8<span class="unit">M</span></div>
+        <div class="kpi-delta up">▲ +15.8% YoY</div>
+        <div class="kpi-sub">EUR 3.96M</div>
+        <svg class="kpi-spark" viewBox="0 0 100 30" preserveAspectRatio="none"><polyline fill="none" stroke="#e87722" stroke-width="2" points="0,22 33,18 66,30 100,2"/></svg>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
+        <div class="kpi-label">Net Profit Q1 2026</div>
+        <div class="kpi-value num">PLN 559<span class="unit">K</span></div>
+        <div class="kpi-delta up">▲ Already &gt; FY 2025</div>
+        <div class="kpi-sub">EUR 132K &middot; vs FY25: PLN 540K</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h4l3-9 4 18 3-9h4"/></svg></div>
+        <div class="kpi-label">Gross Margin Q1 2026</div>
+        <div class="kpi-value num">9.6<span class="unit">%</span></div>
+        <div class="kpi-delta up">▲ +5.6pp vs FY 2025</div>
+        <div class="kpi-sub">FY 2025: 4.0% &middot; FY 2024: 3.2%</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="13"/><path d="M3 10h18M7 15h2"/></svg></div>
+        <div class="kpi-label">Cash &amp; Long-Term Debt</div>
+        <div class="kpi-value num">PLN 711<span class="unit">K</span></div>
+        <div class="kpi-delta up">▲ +182% &middot; LT Debt: 0</div>
+        <div class="kpi-sub">EUR 167K &middot; clean balance</div>
+      </div>
+    </div>
+
+    <div class="memo-body">
+
+      <div class="section">
+        <div class="section-heading"><span class="section-num">1</span>Summary</div>
+        <p>UMS is profitable and growing fast. The company has no long-term debt. <span class="highlight">In just three months of 2026, UMS already earned more profit than in all of 2025.</span> The business is ready for trade financing and a working-capital line of credit today. Before any long-term loan above PLN 5 million (about EUR 1.2 million), an official audit and a cash flow report are needed.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-heading"><span class="section-num">2</span>Key Figures</div>
+        <table class="figures-table">
+          <thead>
+            <tr>
+              <th>Metric</th>
+              <th>2024</th>
+              <th>2025</th>
+              <th class="highlight">Q1 2026</th>
+              <th>Q1 Annualized</th>
+              <th>Trend</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Revenue (PLN '000)</td><td class="num">14,545</td><td class="num">16,842</td><td class="cell-highlight num">9,450</td><td class="num">37,800</td><td class="spark-col"><svg class="spark-svg" viewBox="0 0 60 18"><polyline fill="none" stroke="#e87722" stroke-width="1.5" points="0,12 20,9 40,15 60,1"/></svg></td></tr>
+            <tr><td>Revenue (EUR '000)</td><td class="num">3,422</td><td class="num">3,963</td><td class="cell-highlight num">2,224</td><td class="num">8,894</td><td class="spark-col"><svg class="spark-svg" viewBox="0 0 60 18"><polyline fill="none" stroke="#e87722" stroke-width="1.5" points="0,12 20,9 40,15 60,1"/></svg></td></tr>
+            <tr><td>Gross margin</td><td class="num">3.2%</td><td class="num">4.0%</td><td class="cell-highlight num">9.6%</td><td class="num">9.6%</td><td class="spark-col"><svg class="spark-svg" viewBox="0 0 60 18"><polyline fill="none" stroke="#2E7D32" stroke-width="1.5" points="0,15 20,13 40,2 60,2"/></svg></td></tr>
+            <tr><td>Net profit (PLN '000)</td><td class="num">133</td><td class="num">540</td><td class="cell-highlight num">559</td><td class="num">2,236</td><td class="spark-col"><svg class="spark-svg" viewBox="0 0 60 18"><polyline fill="none" stroke="#2E7D32" stroke-width="1.5" points="0,16 20,8 40,7 60,1"/></svg></td></tr>
+            <tr><td>Net profit (EUR '000)</td><td class="num">31</td><td class="num">127</td><td class="cell-highlight num">132</td><td class="num">526</td><td class="spark-col"><svg class="spark-svg" viewBox="0 0 60 18"><polyline fill="none" stroke="#2E7D32" stroke-width="1.5" points="0,16 20,8 40,7 60,1"/></svg></td></tr>
+            <tr><td>Total equity (PLN '000)</td><td class="num">678</td><td class="num">1,151</td><td>n/a</td><td>&mdash;</td><td class="spark-col"><svg class="spark-svg" viewBox="0 0 60 18"><polyline fill="none" stroke="#2E7D32" stroke-width="1.5" points="0,12 30,3"/></svg></td></tr>
+            <tr><td>Cash &amp; bank (PLN '000)</td><td class="num">252</td><td class="num">711</td><td>n/a</td><td>&mdash;</td><td class="spark-col"><svg class="spark-svg" viewBox="0 0 60 18"><polyline fill="none" stroke="#2E7D32" stroke-width="1.5" points="0,15 30,2"/></svg></td></tr>
+            <tr><td>Long-term debt</td><td class="num">17</td><td class="num">0</td><td>n/a</td><td>&mdash;</td><td class="spark-col"><svg class="spark-svg" viewBox="0 0 60 18"><polyline fill="none" stroke="#2E7D32" stroke-width="1.5" points="0,8 30,16"/></svg></td></tr>
+            <tr class="cit-row"><td>Q1 2026 income tax (CIT)</td><td colspan="5" style="text-align:center" class="num">Tax owed PLN 113K / EUR 27K &middot; Already paid PLN 71K &middot; Balance due PLN 25K</td></tr>
+          </tbody>
+        </table>
+        <div class="table-note">Sources: UMS one-page report 2025 (Polish accounting rules, not yet audited); CIT working file Q1 2026.</div>
+      </div>
+
+      <div class="section">
+        <div class="section-heading"><span class="section-num">3</span>Findings &amp; Risk Snapshot</div>
+        <div class="risk-grid">
+          <div class="risk-row" data-sev="low">
+            <div class="risk-severity"><div class="severity-bar"><span></span><span></span><span></span></div>Strength</div>
+            <div class="risk-content"><strong>Strong profit turning point.</strong>Gross margin moved up from 4.0% to 9.6% in one quarter. Q1 2026 net profit (PLN 559K / EUR 132K) is already higher than the full 2025 result.</div>
+            <div class="risk-tag">Positive</div>
+          </div>
+          <div class="risk-row" data-sev="high">
+            <div class="risk-severity"><div class="severity-bar"><span></span><span></span><span></span></div>High Risk</div>
+            <div class="risk-content"><strong>Heavy reliance on one supplier.</strong>ZIK provides 90% of UMS costs. Risk drops once UMS buys ZIK (planned EUR 6M at 4.0x EBITDA &mdash; bottom of EU range).</div>
+            <div class="risk-tag">Mitigated</div>
+          </div>
+          <div class="risk-row" data-sev="medium">
+            <div class="risk-severity"><div class="severity-bar"><span></span><span></span><span></span></div>Medium</div>
+            <div class="risk-content"><strong>Very tight working cash.</strong>Net working capital is only PLN 2K. 88% of revenue is foreign in EUR/USD with no FX protection. FX cover is the cheapest big-risk fix.</div>
+            <div class="risk-tag">Action Now</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-heading"><span class="section-num">4</span>Recommendations</div>
+        <ol class="legal-list">
+          <li><span class="timing">30 days</span><strong>Hire an official auditor</strong> for FY 2025 and prepare a cash flow report under Polish accounting rules (PSR).</li>
+          <li><span class="timing">60 days</span><strong>Open a revolving credit line</strong> of PLN 2&ndash;3 million (about EUR 0.5&ndash;0.7 million) at PKO BP or mBank.</li>
+          <li><span class="timing">90 days</span><strong>Open EUR/PLN forward contracts</strong> to cover at least 50% of next-year foreign revenue. Close the ZIK acquisition.</li>
+        </ol>
+      </div>
+
+      <div class="section">
+        <div class="section-heading"><span class="section-num">5</span>Conclusion</div>
+        <div class="conclusion-box">
+          <p><strong>Position: Satisfactory &mdash; with conditions.</strong> UMS is ready for trade financing and a working-capital line of credit right now. A long-term loan above EUR 1.2 million needs three things first: an official audit, a cash flow report, and an FX protection plan.</p>
+          <div class="rating-line">
+            <div class="rating-label">Internal Credit Rating Indicator</div>
+            <div class="rating-grade">B+ <span class="arrow">&rarr;</span> BB&minus;</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="memo-footer">
+      <div class="footer-privilege">Privileged &amp; Confidential &middot; Board Use Only</div>
+      This memorandum is prepared for the internal use of the Board of Directors of United Multimodal Services sp. z o.o. It contains commercially sensitive information. Do not share, copy, or send to third parties without written approval. The financial information is based on unaudited Polish accounting reports and management working files.
+      <div class="footer-sources">
+        <strong>Sources:</strong> UMS Financial One-Pager 2025 (PSR, unaudited) &middot; CIT za 1 kwartał 2026 (trial balance, book and tax basis) &middot; FX rate: PLN/EUR = 4.25 (indicative, mid-market).
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ============================== POLISH ============================== -->
+  <div class="lang-panel" data-lang-panel="pl">
+
+    <div class="meta-block">
+      <div class="meta-row"><div class="label">Do:</div><div class="value">Zarząd, UMS sp. z o.o.</div></div>
+      <div class="meta-row"><div class="label">Od:</div><div class="value">Zespół Doradztwa Korporacyjnego</div></div>
+      <div class="meta-row"><div class="label">Data:</div><div class="value">28 kwietnia 2026 r.</div></div>
+      <div class="meta-row"><div class="label">Dotyczy:</div><div class="value">Przegląd 2025 i pozycja CIT za I kw. 2026</div></div>
+      <div class="meta-row"><div class="label">Kurs FX:</div><div class="value">PLN/EUR = 4,25 (rynkowy, orientacyjny)</div></div>
+      <div class="meta-row"><div class="label">Podstawa:</div><div class="value">PSR — dane nieaudytowane</div></div>
+    </div>
+
+    <div class="kpi-band">
+      <div class="kpi-card">
+        <div class="kpi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 17l6-6 4 4 8-8"/><path d="M21 7v0M14 7h7v7"/></svg></div>
+        <div class="kpi-label">Przychody 2025</div>
+        <div class="kpi-value num">PLN 16,8<span class="unit">M</span></div>
+        <div class="kpi-delta up">▲ +15,8% r/r</div>
+        <div class="kpi-sub">EUR 3,96M</div>
+        <svg class="kpi-spark" viewBox="0 0 100 30" preserveAspectRatio="none"><polyline fill="none" stroke="#e87722" stroke-width="2" points="0,22 33,18 66,30 100,2"/></svg>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
+        <div class="kpi-label">Zysk netto I kw. 2026</div>
+        <div class="kpi-value num">PLN 559<span class="unit">K</span></div>
+        <div class="kpi-delta up">▲ Już &gt; cały 2025 r.</div>
+        <div class="kpi-sub">EUR 132K &middot; 2025: PLN 540K</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h4l3-9 4 18 3-9h4"/></svg></div>
+        <div class="kpi-label">Marża brutto I kw. 2026</div>
+        <div class="kpi-value num">9,6<span class="unit">%</span></div>
+        <div class="kpi-delta up">▲ +5,6pp vs 2025</div>
+        <div class="kpi-sub">2025: 4,0% &middot; 2024: 3,2%</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="13"/><path d="M3 10h18M7 15h2"/></svg></div>
+        <div class="kpi-label">Środki i Dług Długoterm.</div>
+        <div class="kpi-value num">PLN 711<span class="unit">K</span></div>
+        <div class="kpi-delta up">▲ +182% &middot; Dług DT: 0</div>
+        <div class="kpi-sub">EUR 167K &middot; czysty bilans</div>
+      </div>
+    </div>
+
+    <div class="memo-body">
+
+      <div class="section">
+        <div class="section-heading"><span class="section-num">1</span>Podsumowanie</div>
+        <p>UMS jest rentowna i szybko rośnie. Spółka nie ma długu długoterminowego. <span class="highlight">W ciągu zaledwie trzech miesięcy 2026 r. UMS zarobiła więcej niż przez cały rok 2025.</span> Firma jest gotowa już dziś na finansowanie handlowe i linię kredytu obrotowego. Przed każdym kredytem długoterminowym powyżej 5 mln PLN (ok. 1,2 mln EUR) potrzebny jest oficjalny audyt i rachunek przepływów pieniężnych.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-heading"><span class="section-num">2</span>Kluczowe Wskaźniki</div>
+        <table class="figures-table">
+          <thead>
+            <tr>
+              <th>Wskaźnik</th><th>2024</th><th>2025</th><th class="highlight">I kw. 2026</th><th>Rocznie (proj.)</th><th>Trend</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Przychody (tys. PLN)</td><td class="num">14&nbsp;545</td><td class="num">16&nbsp;842</td><td class="cell-highlight num">9&nbsp;450</td><td class="num">37&nbsp;800</td><td class="spark-col"><svg class="spark-svg" viewBox="0 0 60 18"><polyline fill="none" stroke="#e87722" stroke-width="1.5" points="0,12 20,9 40,15 60,1"/></svg></td></tr>
+            <tr><td>Przychody (tys. EUR)</td><td class="num">3&nbsp;422</td><td class="num">3&nbsp;963</td><td class="cell-highlight num">2&nbsp;224</td><td class="num">8&nbsp;894</td><td class="spark-col"><svg class="spark-svg" viewBox="0 0 60 18"><polyline fill="none" stroke="#e87722" stroke-width="1.5" points="0,12 20,9 40,15 60,1"/></svg></td></tr>
+            <tr><td>Marża brutto</td><td class="num">3,2%</td><td class="num">4,0%</td><td class="cell-highlight num">9,6%</td><td class="num">9,6%</td><td class="spark-col"><svg class="spark-svg" viewBox="0 0 60 18"><polyline fill="none" stroke="#2E7D32" stroke-width="1.5" points="0,15 20,13 40,2 60,2"/></svg></td></tr>
+            <tr><td>Zysk netto (tys. PLN)</td><td class="num">133</td><td class="num">540</td><td class="cell-highlight num">559</td><td class="num">2&nbsp;236</td><td class="spark-col"><svg class="spark-svg" viewBox="0 0 60 18"><polyline fill="none" stroke="#2E7D32" stroke-width="1.5" points="0,16 20,8 40,7 60,1"/></svg></td></tr>
+            <tr><td>Zysk netto (tys. EUR)</td><td class="num">31</td><td class="num">127</td><td class="cell-highlight num">132</td><td class="num">526</td><td class="spark-col"><svg class="spark-svg" viewBox="0 0 60 18"><polyline fill="none" stroke="#2E7D32" stroke-width="1.5" points="0,16 20,8 40,7 60,1"/></svg></td></tr>
+            <tr><td>Kapitał własny (tys. PLN)</td><td class="num">678</td><td class="num">1&nbsp;151</td><td>n/d</td><td>&mdash;</td><td class="spark-col"><svg class="spark-svg" viewBox="0 0 60 18"><polyline fill="none" stroke="#2E7D32" stroke-width="1.5" points="0,12 30,3"/></svg></td></tr>
+            <tr><td>Środki pieniężne (tys. PLN)</td><td class="num">252</td><td class="num">711</td><td>n/d</td><td>&mdash;</td><td class="spark-col"><svg class="spark-svg" viewBox="0 0 60 18"><polyline fill="none" stroke="#2E7D32" stroke-width="1.5" points="0,15 30,2"/></svg></td></tr>
+            <tr><td>Dług długoterminowy</td><td class="num">17</td><td class="num">0</td><td>n/d</td><td>&mdash;</td><td class="spark-col"><svg class="spark-svg" viewBox="0 0 60 18"><polyline fill="none" stroke="#2E7D32" stroke-width="1.5" points="0,8 30,16"/></svg></td></tr>
+            <tr class="cit-row"><td>Pozycja CIT — I kw. 2026</td><td colspan="5" style="text-align:center" class="num">Podatek 113 tys. PLN / 27 tys. EUR &middot; Zapłacone 71 tys. PLN &middot; Saldo 25 tys. PLN</td></tr>
+          </tbody>
+        </table>
+        <div class="table-note">Źródła: jednostronicowy raport UMS za 2025 r. (PSR, nieaudytowany); plik roboczy CIT za I kw. 2026 r.</div>
+      </div>
+
+      <div class="section">
+        <div class="section-heading"><span class="section-num">3</span>Ustalenia i Migawka Ryzyka</div>
+        <div class="risk-grid">
+          <div class="risk-row" data-sev="low">
+            <div class="risk-severity"><div class="severity-bar"><span></span><span></span><span></span></div>Mocna strona</div>
+            <div class="risk-content"><strong>Punkt zwrotny rentowności.</strong>Marża brutto wzrosła z 4,0% do 9,6% w jednym kwartale. Zysk netto za I kw. 2026 (559 tys. PLN / 132 tys. EUR) jest już wyższy niż wynik za cały 2025 r.</div>
+            <div class="risk-tag">Pozytyw</div>
+          </div>
+          <div class="risk-row" data-sev="high">
+            <div class="risk-severity"><div class="severity-bar"><span></span><span></span><span></span></div>Wysokie</div>
+            <div class="risk-content"><strong>Duża zależność od jednego dostawcy.</strong>ZIK pokrywa 90% kosztów UMS. Ryzyko maleje po przejęciu ZIK (planowane 6 mln EUR przy 4,0x EBITDA &mdash; dolna granica UE).</div>
+            <div class="risk-tag">Łagodzone</div>
+          </div>
+          <div class="risk-row" data-sev="medium">
+            <div class="risk-severity"><div class="severity-bar"><span></span><span></span><span></span></div>Średnie</div>
+            <div class="risk-content"><strong>Bardzo niski kapitał obrotowy.</strong>Kapitał obrotowy netto = 2 tys. PLN. 88% przychodów zagranicznych w EUR/USD bez zabezpieczenia FX. Hedging FX = najtańszy fix.</div>
+            <div class="risk-tag">Działać teraz</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-heading"><span class="section-num">4</span>Zalecenia</div>
+        <ol class="legal-list">
+          <li><span class="timing">30 dni</span><strong>Zatrudnić oficjalnego biegłego rewidenta</strong> na 2025 r. oraz przygotować rachunek przepływów pieniężnych według PSR.</li>
+          <li><span class="timing">60 dni</span><strong>Otworzyć linię rewolwingową</strong> 2&ndash;3 mln PLN (ok. 0,5&ndash;0,7 mln EUR) w PKO BP lub mBank.</li>
+          <li><span class="timing">90 dni</span><strong>Zawrzeć transakcje forward EUR/PLN</strong> na co najmniej 50% przychodów eksportowych. Zamknąć przejęcie ZIK.</li>
+        </ol>
+      </div>
+
+      <div class="section">
+        <div class="section-heading"><span class="section-num">5</span>Wniosek</div>
+        <div class="conclusion-box">
+          <p><strong>Pozycja: Zadowalająca &mdash; z warunkami.</strong> UMS jest gotowa już dziś na finansowanie handlowe i linię kredytu obrotowego. Kredyt długoterminowy powyżej 1,2 mln EUR wymaga trzech rzeczy: oficjalnego audytu, rachunku przepływów pieniężnych oraz planu zabezpieczenia FX.</p>
+          <div class="rating-line">
+            <div class="rating-label">Wewnętrzny Wskaźnik Ratingu</div>
+            <div class="rating-grade">B+ <span class="arrow">&rarr;</span> BB&minus;</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="memo-footer">
+      <div class="footer-privilege">Poufne &middot; Wyłącznie do Użytku Zarządu</div>
+      Niniejszy memorandum został przygotowany na wewnętrzny użytek Zarządu UMS sp. z o.o. Zawiera informacje handlowo wrażliwe. Nie udostępniać, nie kopiować ani nie przekazywać osobom trzecim bez pisemnej zgody. Dane finansowe oparte są na nieaudytowanych raportach polskich (PSR) oraz plikach roboczych zarządu.
+      <div class="footer-sources">
+        <strong>Źródła:</strong> Raport finansowy UMS 2025 (PSR, nieaudytowany) &middot; CIT za I kw. 2026 (zestawienie obrotów i sald) &middot; Kurs FX: PLN/EUR = 4,25 (orientacyjny rynkowy).
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ============================== UKRAINIAN ============================== -->
+  <div class="lang-panel" data-lang-panel="ua">
+
+    <div class="meta-block">
+      <div class="meta-row"><div class="label">Кому:</div><div class="value">Раді директорів, UMS sp. z o.o.</div></div>
+      <div class="meta-row"><div class="label">Від:</div><div class="value">Команда Корпоративного Консультування</div></div>
+      <div class="meta-row"><div class="label">Дата:</div><div class="value">28 квітня 2026 р.</div></div>
+      <div class="meta-row"><div class="label">Тема:</div><div class="value">Огляд 2025 та позиція CIT за I кв. 2026</div></div>
+      <div class="meta-row"><div class="label">Курс FX:</div><div class="value">PLN/EUR = 4,25 (ринковий, орієнтовний)</div></div>
+      <div class="meta-row"><div class="label">Основа:</div><div class="value">PSR — неаудійовано</div></div>
+    </div>
+
+    <div class="kpi-band">
+      <div class="kpi-card">
+        <div class="kpi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 17l6-6 4 4 8-8"/><path d="M21 7v0M14 7h7v7"/></svg></div>
+        <div class="kpi-label">Виручка 2025</div>
+        <div class="kpi-value num">PLN 16,8<span class="unit">M</span></div>
+        <div class="kpi-delta up">▲ +15,8% р/р</div>
+        <div class="kpi-sub">EUR 3,96M</div>
+        <svg class="kpi-spark" viewBox="0 0 100 30" preserveAspectRatio="none"><polyline fill="none" stroke="#e87722" stroke-width="2" points="0,22 33,18 66,30 100,2"/></svg>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
+        <div class="kpi-label">Чистий прибуток I кв. 2026</div>
+        <div class="kpi-value num">PLN 559<span class="unit">K</span></div>
+        <div class="kpi-delta up">▲ Уже &gt; весь 2025</div>
+        <div class="kpi-sub">EUR 132K &middot; 2025: PLN 540K</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h4l3-9 4 18 3-9h4"/></svg></div>
+        <div class="kpi-label">Валова маржа I кв. 2026</div>
+        <div class="kpi-value num">9,6<span class="unit">%</span></div>
+        <div class="kpi-delta up">▲ +5,6pp vs 2025</div>
+        <div class="kpi-sub">2025: 4,0% &middot; 2024: 3,2%</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="13"/><path d="M3 10h18M7 15h2"/></svg></div>
+        <div class="kpi-label">Кошти і Довгостр. Борг</div>
+        <div class="kpi-value num">PLN 711<span class="unit">K</span></div>
+        <div class="kpi-delta up">▲ +182% &middot; Борг ДТ: 0</div>
+        <div class="kpi-sub">EUR 167K &middot; чистий баланс</div>
+      </div>
+    </div>
+
+    <div class="memo-body">
+
+      <div class="section">
+        <div class="section-heading"><span class="section-num">1</span>Стисле Резюме</div>
+        <p>UMS прибуткова і швидко зростає. Компанія не має довгострокового боргу. <span class="highlight">За три місяці 2026 року UMS уже заробила більше прибутку, ніж за весь 2025 рік.</span> Бізнес уже сьогодні готовий до торговельного фінансування та обігової кредитної лінії. Перед будь-яким довгостроковим кредитом понад 5 млн PLN (близько 1,2 млн EUR) потрібен офіційний аудит і звіт про рух грошових коштів.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-heading"><span class="section-num">2</span>Ключові Показники</div>
+        <table class="figures-table">
+          <thead>
+            <tr>
+              <th>Показник</th><th>2024</th><th>2025</th><th class="highlight">I кв. 2026</th><th>Річно (проєкц.)</th><th>Тренд</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Виручка (тис. PLN)</td><td class="num">14&nbsp;545</td><td class="num">16&nbsp;842</td><td class="cell-highlight num">9&nbsp;450</td><td class="num">37&nbsp;800</td><td class="spark-col"><svg class="spark-svg" viewBox="0 0 60 18"><polyline fill="none" stroke="#e87722" stroke-width="1.5" points="0,12 20,9 40,15 60,1"/></svg></td></tr>
+            <tr><td>Виручка (тис. EUR)</td><td class="num">3&nbsp;422</td><td class="num">3&nbsp;963</td><td class="cell-highlight num">2&nbsp;224</td><td class="num">8&nbsp;894</td><td class="spark-col"><svg class="spark-svg" viewBox="0 0 60 18"><polyline fill="none" stroke="#e87722" stroke-width="1.5" points="0,12 20,9 40,15 60,1"/></svg></td></tr>
+            <tr><td>Валова маржа</td><td class="num">3,2%</td><td class="num">4,0%</td><td class="cell-highlight num">9,6%</td><td class="num">9,6%</td><td class="spark-col"><svg class="spark-svg" viewBox="0 0 60 18"><polyline fill="none" stroke="#2E7D32" stroke-width="1.5" points="0,15 20,13 40,2 60,2"/></svg></td></tr>
+            <tr><td>Чистий прибуток (тис. PLN)</td><td class="num">133</td><td class="num">540</td><td class="cell-highlight num">559</td><td class="num">2&nbsp;236</td><td class="spark-col"><svg class="spark-svg" viewBox="0 0 60 18"><polyline fill="none" stroke="#2E7D32" stroke-width="1.5" points="0,16 20,8 40,7 60,1"/></svg></td></tr>
+            <tr><td>Чистий прибуток (тис. EUR)</td><td class="num">31</td><td class="num">127</td><td class="cell-highlight num">132</td><td class="num">526</td><td class="spark-col"><svg class="spark-svg" viewBox="0 0 60 18"><polyline fill="none" stroke="#2E7D32" stroke-width="1.5" points="0,16 20,8 40,7 60,1"/></svg></td></tr>
+            <tr><td>Власний капітал (тис. PLN)</td><td class="num">678</td><td class="num">1&nbsp;151</td><td>н/д</td><td>&mdash;</td><td class="spark-col"><svg class="spark-svg" viewBox="0 0 60 18"><polyline fill="none" stroke="#2E7D32" stroke-width="1.5" points="0,12 30,3"/></svg></td></tr>
+            <tr><td>Грошові кошти (тис. PLN)</td><td class="num">252</td><td class="num">711</td><td>н/д</td><td>&mdash;</td><td class="spark-col"><svg class="spark-svg" viewBox="0 0 60 18"><polyline fill="none" stroke="#2E7D32" stroke-width="1.5" points="0,15 30,2"/></svg></td></tr>
+            <tr><td>Довгостроковий борг</td><td class="num">17</td><td class="num">0</td><td>н/д</td><td>&mdash;</td><td class="spark-col"><svg class="spark-svg" viewBox="0 0 60 18"><polyline fill="none" stroke="#2E7D32" stroke-width="1.5" points="0,8 30,16"/></svg></td></tr>
+            <tr class="cit-row"><td>Податок на прибуток — I кв. 2026</td><td colspan="5" style="text-align:center" class="num">Податок 113 тис. PLN / 27 тис. EUR &middot; Сплачено 71 тис. PLN &middot; Залишок 25 тис. PLN</td></tr>
+          </tbody>
+        </table>
+        <div class="table-note">Джерела: одностраничний звіт UMS за 2025 р. (PSR, неаудійовано); робочий файл CIT за I кв. 2026 р.</div>
+      </div>
+
+      <div class="section">
+        <div class="section-heading"><span class="section-num">3</span>Висновки та Знімок Ризиків</div>
+        <div class="risk-grid">
+          <div class="risk-row" data-sev="low">
+            <div class="risk-severity"><div class="severity-bar"><span></span><span></span><span></span></div>Сильна сторона</div>
+            <div class="risk-content"><strong>Точка перелому прибутковості.</strong>Валова маржа зросла з 4,0% до 9,6% за один квартал. Чистий прибуток за I кв. 2026 (559 тис. PLN / 132 тис. EUR) уже вищий за весь 2025 рік.</div>
+            <div class="risk-tag">Позитив</div>
+          </div>
+          <div class="risk-row" data-sev="high">
+            <div class="risk-severity"><div class="severity-bar"><span></span><span></span><span></span></div>Високий</div>
+            <div class="risk-content"><strong>Сильна залежність від одного постачальника.</strong>ZIK покриває 90% витрат UMS. Ризик зменшиться після купівлі ZIK (планується 6 млн EUR при 4,0x EBITDA &mdash; нижня межа ЄС).</div>
+            <div class="risk-tag">Зменшується</div>
+          </div>
+          <div class="risk-row" data-sev="medium">
+            <div class="risk-severity"><div class="severity-bar"><span></span><span></span><span></span></div>Середній</div>
+            <div class="risk-content"><strong>Дуже малий обіговий капітал.</strong>NWC = 2 тис. PLN. 88% виручки — іноземна, в EUR/USD без захисту FX. Хедж FX — найдешевший спосіб знизити ризик.</div>
+            <div class="risk-tag">Діяти зараз</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-heading"><span class="section-num">4</span>Рекомендації</div>
+        <ol class="legal-list">
+          <li><span class="timing">30 днів</span><strong>Залучити офіційного аудитора</strong> для перевірки 2025 року і підготувати звіт про рух грошових коштів за PSR.</li>
+          <li><span class="timing">60 днів</span><strong>Відкрити револьверну кредитну лінію</strong> 2&ndash;3 млн PLN (близько 0,5&ndash;0,7 млн EUR) у PKO BP або mBank.</li>
+          <li><span class="timing">90 днів</span><strong>Укласти форвардні контракти EUR/PLN</strong> щонайменше на 50% експортної виручки. Закрити придбання ZIK.</li>
+        </ol>
+      </div>
+
+      <div class="section">
+        <div class="section-heading"><span class="section-num">5</span>Висновок</div>
+        <div class="conclusion-box">
+          <p><strong>Позиція: Задовільно &mdash; з умовами.</strong> UMS уже сьогодні готова до торговельного фінансування та обігової кредитної лінії. Довгостроковий кредит понад 1,2 млн EUR потребує трьох речей наперед: офіційного аудиту, звіту про рух грошових коштів та плану захисту від FX.</p>
+          <div class="rating-line">
+            <div class="rating-label">Внутрішній Кредитний Рейтинг</div>
+            <div class="rating-grade">B+ <span class="arrow">&rarr;</span> BB&minus;</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="memo-footer">
+      <div class="footer-privilege">Конфіденційно &middot; Виключно для Користування Радою</div>
+      Цей меморандум підготовлено для внутрішнього користування Ради директорів UMS sp. z o.o. Він містить комерційно чутливу інформацію. Не передавати, не копіювати і не пересилати третім особам без письмового дозволу. Фінансові дані ґрунтуються на неаудійованих польських звітах (PSR) та робочих файлах керівництва.
+      <div class="footer-sources">
+        <strong>Джерела:</strong> Фінансовий одностраничник UMS 2025 (PSR, неаудійовано) &middot; CIT за I кв. 2026 (оборотно-сальдова відомість) &middot; Курс: PLN/EUR = 4,25 (орієнтовний ринковий).
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- FLOATING ACTIONS -->
+<div class="actions">
+  <button class="action-btn secondary" onclick="printAll()">Print All</button>
+  <button class="action-btn" onclick="window.print()">Print Active</button>
+</div>
+
+<script>
+  const buttons = document.querySelectorAll('.lang-switch-btn');
+  const panels = document.querySelectorAll('.lang-panel');
+  const indicator = document.getElementById('langIndicator');
+  const switchWrap = document.getElementById('langSwitchWrap');
+  const statusText = document.querySelector('#statusRail .status-text');
+  const statusPill = document.querySelector('#statusRail .status-pill');
+  const progress = document.getElementById('scrollProgress');
+
+  function moveIndicator(btn) {
+    const wrap = btn.parentElement;
+    const wrapRect = wrap.getBoundingClientRect();
+    const btnRect = btn.getBoundingClientRect();
+    const left = btnRect.left - wrapRect.left;
+    indicator.style.transform = `translateX(${left - 4}px)`;
+    indicator.style.width = `${btnRect.width}px`;
+  }
+
+  function initIndicator() {
+    const active = document.querySelector('.lang-switch-btn.active');
+    if (active) moveIndicator(active);
+  }
+
+  function switchLang(lang) {
+    const btn = document.querySelector(`.lang-switch-btn[data-lang="${lang}"]`);
+    if (!btn || btn.classList.contains('active')) return;
+
+    buttons.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
+    panels.forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    btn.setAttribute('aria-selected', 'true');
+    moveIndicator(btn);
+
+    setTimeout(() => {
+      document.querySelector(`[data-lang-panel="${lang}"]`).classList.add('active');
+    }, 60);
+
+    // Translate status rail
+    if (statusText.dataset[lang]) statusText.innerHTML = statusText.dataset[lang];
+    if (statusPill.dataset[lang]) statusPill.textContent = statusPill.dataset[lang];
+
+    document.documentElement.lang = lang === 'ua' ? 'uk' : lang;
+    localStorage.setItem('umsBoardLang', lang);
+  }
+
+  buttons.forEach(btn => btn.addEventListener('click', () => switchLang(btn.dataset.lang)));
+
+  document.addEventListener('keydown', (e) => {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    if (e.key === '1') switchLang('en');
+    else if (e.key === '2') switchLang('pl');
+    else if (e.key === '3') switchLang('ua');
+    else if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+      const order = ['en', 'pl', 'ua'];
+      const cur = document.querySelector('.lang-switch-btn.active').dataset.lang;
+      const idx = order.indexOf(cur);
+      const next = e.key === 'ArrowRight' ? order[(idx + 1) % 3] : order[(idx + 2) % 3];
+      switchLang(next);
+    }
+  });
+
+  // Scroll progress + sticky shadow
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement;
+    const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+    progress.style.width = pct + '%';
+
+    if (window.scrollY > 60) switchWrap.classList.add('scrolled');
+    else switchWrap.classList.remove('scrolled');
+  }, { passive: true });
+
+  window.addEventListener('resize', initIndicator);
+
+  const savedLang = localStorage.getItem('umsBoardLang');
+  if (savedLang && ['en','pl','ua'].includes(savedLang) && savedLang !== 'en') {
+    setTimeout(() => switchLang(savedLang), 100);
+  }
+
+  if (document.readyState === 'complete') initIndicator();
+  else window.addEventListener('load', initIndicator);
+  setTimeout(initIndicator, 50);
+
+  function printAll() {
+    panels.forEach(p => p.classList.add('print-all'));
+    setTimeout(() => {
+      window.print();
+      setTimeout(() => panels.forEach(p => p.classList.remove('print-all')), 500);
+    }, 50);
+  }
+</script>
+
+</body>
+</html>
